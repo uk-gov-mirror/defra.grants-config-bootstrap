@@ -214,24 +214,17 @@ Rules:
 
 ### Check Pull Request Workflow
 
-Merge bootstrap workflow content from:
-
-```text
-bootstrap/publish/check-pull-request.yml
-```
-
-into:
+Replace:
 
 ```text
 .github/workflows/check-pull-request.yml
 ```
 
-Rules:
+with:
 
-* Keep the existing workflow name.
-* Preserve repository-specific jobs.
-* Pay close attention to the `uses`, bootstrap versions should be used
-* Comment-in the 'SonarCloud Scan' step and update the `uses` with the bootstrap version.
+```text
+bootstrap/publish/check-pull-request.yml
+```
 
 ---
 
