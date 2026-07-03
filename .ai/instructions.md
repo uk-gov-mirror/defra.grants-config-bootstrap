@@ -47,6 +47,7 @@ https://github.com/DEFRA/grants-config-bootstrap
     * Place **Grant Configuration** as the first section link.
     * Insert the Grant Configuration content immediately after the section links.
     * Preserve all existing repository-specific documentation.
+    * Replace Dependabot and SonarCloud badges with bootstrap versions.
 
 ---
 
@@ -54,10 +55,16 @@ https://github.com/DEFRA/grants-config-bootstrap
 
 ### Dev Dependencies
 
+Uninstall (will install the latest version shortly):
+
+```bash
+npm uninstall -D vitest @vitest/coverage-v8
+```
+
 Install:
 
 ```bash
-npm install -D @changesets/cli @changesets/changelog-github
+npm install -D vitest @vitest/coverage-v8 @changesets/cli @changesets/changelog-github
 ```
 
 ### Runtime Dependency
@@ -205,6 +212,27 @@ Rules:
 * Pay close attention to the `uses`, bootstrap versions should be used
 * Add any missing bootstrap jobs, steps, permissions, and environment variables.
 
+### Check Pull Request Workflow
+
+Merge bootstrap workflow content from:
+
+```text
+bootstrap/publish/check-pull-request.yml
+```
+
+into:
+
+```text
+.github/workflows/check-pull-request.yml
+```
+
+Rules:
+
+* Keep the existing workflow name.
+* Preserve repository-specific jobs.
+* Pay close attention to the `uses`, bootstrap versions should be used
+* Comment-in the 'SonarCloud Scan' step and update the `uses` with the bootstrap version.
+
 ---
 
 ## 7. Grant Configuration Code Changes
@@ -291,6 +319,18 @@ src/plugins/logger-options.test.js
 
 Ensure all new functionality is tested.
 
+### fail-action.test.js
+
+Update uses of `Error()` to `new Error()`
+
+### setup-proxy.js and setup-proxy.test.js
+
+Update uses of `global` to `globalThis`
+
+### vitest.config.js
+
+Don't update vitest.config.js
+
 ---
 
 ## 8. Local Development Configuration
@@ -352,7 +392,7 @@ configs-bucket
 
 ### Dockerfile
 
-Merge bootstrap additions from:
+Merge bootstrap amendments from:
 
 ```text
 bootstrap/local-running/Dockerfile
@@ -396,7 +436,9 @@ to:
 
 ---
 
-## 9. Sonar Configuration
+## 9. Code Health Configuration
+
+### Sonar Configuration
 
 Update:
 
@@ -414,6 +456,28 @@ src/routes/health.js
 Rules:
 
 * Add without spaces.
+
+Update comment starting `To set up Sonar`, replace `howto` with `how-to`
+
+### Dependabot Configuration
+
+Copy:
+
+```text
+bootstrap/code-health/dependabot.yml
+```
+
+to:
+
+```text
+.github/dependabot.yml
+```
+
+then remove:
+
+```text
+.github/example.dependabot.yml
+```
 
 ---
 

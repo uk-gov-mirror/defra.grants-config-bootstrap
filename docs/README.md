@@ -104,3 +104,11 @@ If a hotfix is required, complete the following steps:
    - Remove the generated changeset file.
 
    The workflow requires a `description` input, which is used as part of the workflow run name.
+
+### Dependabot
+
+Dependabot is enabled in this repository.
+
+### SonarCloud
+
+SonarCloud is enabled in this repository.
