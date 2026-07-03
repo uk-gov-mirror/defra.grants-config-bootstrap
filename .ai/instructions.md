@@ -47,7 +47,7 @@ https://github.com/DEFRA/grants-config-bootstrap
     * Place **Grant Configuration** as the first section link.
     * Insert the Grant Configuration content immediately after the section links.
     * Preserve all existing repository-specific documentation.
-    * Replace Dependabot and SonarCloud badges with bootstrap versions.
+    * Replace `Dependabot` and `SonarCloud` sections with the bootstrap version.
 
 ---
 
