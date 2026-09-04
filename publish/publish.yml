@@ -33,12 +33,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 #7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #7.0.1
         with:
           fetch-depth: 0
 
       - name: Test code and Create Test Coverage Reports
-        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e #6.4.0
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 #7.0.0
         with:
           node-version-file: .nvmrc
           cache: npm
@@ -117,12 +117,11 @@ jobs:
 
       - name: Create Release PR or GitHub Release
         id: changesets
-        uses: changesets/action@a45c4d594aa4e2c509dc14a9f2b3b67ba3780d0d #1.9.0
+        uses: changesets/action@8488615a623b1b9c987934bb89eae8af6a946ac1 #v2.1.1
         with:
-          commitMode: 'github-api'
-          publish: npm run github:release
-          commit: ${{ env.RELEASE_MSG }}
-          title: ${{ env.RELEASE_MSG }}
+          publish-script: npm run github:release
+          commit-message: ${{ env.RELEASE_MSG }}
+          pr-title: ${{ env.RELEASE_MSG }}
 
       - name: Trigger required checks on release PR, then merge to main, deploy to CDP and delete release branch
         if: ${{ !startsWith(github.event_name == 'push' && github.event.head_commit.message || inputs.commit_message, 'Create new config version') }}
@@ -179,7 +178,7 @@ jobs:
             });
 
       - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@713881670b6b3676cda39549040e2d88c70d582e #8.2.0
+        uses: SonarSource/sonarqube-scan-action@22918119ff8e1ca75a623e15c8296b6ea4fbe28f #8.2.1
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
